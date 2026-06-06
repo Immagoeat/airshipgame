@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://gp342a7xwuue" path="res://scripts/filmgrain.gd" id="2_0wfyh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o5qli"]
+bounce = 0.1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0wfyh"]
 
@@ -19,13 +20,12 @@ background_mode = 2
 sky = SubResource("Sky_0wfyh")
 ssr_enabled = true
 fog_enabled = true
+fog_density = 0.0409
 fog_sky_affect = 0.196
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.0088
+volumetric_fog_density = 0.1325
 volumetric_fog_anisotropy = 0.01
 volumetric_fog_sky_affect = 0.299
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_o5qli"]
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_0wfyh"]
 resource_local_to_scene = false
@@ -40,26 +40,47 @@ grain_amount = 0.08
 [sub_resource type="Compositor" id="Compositor_jyhfs"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_0wfyh")])
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0wfyh"]
+bounce = 0.3
+absorbent = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sugp2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jyhfs"]
+albedo_color = Color(0.3654011, 0.68294597, 0.99754435, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tbgi4"]
+material = SubResource("StandardMaterial3D_jyhfs")
+
 [node name="Main" type="Node3D" unique_id=659049761]
 
 [node name="Player" parent="." unique_id=2088449081 instance=ExtResource("1_o5qli")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1610885, 39.262165, -0.8653488)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.1610885, 31.06539, -0.8653488)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1568743439]
+[node name="Big Box" type="StaticBody3D" parent="." unique_id=1568743439]
 transform = Transform3D(60, 0, 0, 0, 60, 0, 0, 0, 60, 1.2009768, 0, 0)
 physics_material_override = SubResource("PhysicsMaterial_o5qli")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1811057056]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Big Box" unique_id=1811057056]
 shape = SubResource("BoxShape3D_0wfyh")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/CollisionShape3D" unique_id=1235920450]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Big Box/CollisionShape3D" unique_id=1235920450]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0038208961, 0, 0)
 mesh = SubResource("BoxMesh_sugp2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=915799016]
 environment = SubResource("Environment_o5qli")
-camera_attributes = SubResource("CameraAttributesPractical_o5qli")
 compositor = SubResource("Compositor_jyhfs")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1893734922]
 transform = Transform3D(1, 0, 0, 0, 0.4170106, 0.90890163, 0, -0.90890163, 0.4170106, 0, 299.4047, 0)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=637929381]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 37.807247, 0)
+physics_material_override = SubResource("PhysicsMaterial_0wfyh")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1246409159]
+shape = SubResource("BoxShape3D_sugp2")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=2058253085]
+mesh = SubResource("BoxMesh_tbgi4")

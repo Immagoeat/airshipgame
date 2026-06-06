@@ -9,6 +9,7 @@ var mousemode: bool = true
 var esc_cooldown: bool = false
 
 @onready var camera: Camera3D = $Camera3D
+@onready var anim: AnimationPlayer = $bob
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -53,5 +54,15 @@ func _physics_process(delta: float) -> void:
 			velocity.z = move_toward(velocity.z, 0, SPEED)
 		else:
 			pass
+			
+	var is_moving = Vector2(velocity.x, velocity.z).length() > 0.1
+	if is_moving and is_on_floor():
+		anim.play("bobbing")
+		# Speed up the animation when running
+		anim.speed_scale = 1.6 if Input.is_action_pressed("shift") else 1.0
+	else:
+		# Smoothly stop bobbing and reset camera position
+		anim.speed_scale = 1.0
+		anim.stop()
 
 	move_and_slide()
