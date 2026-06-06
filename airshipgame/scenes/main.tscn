@@ -36,6 +36,7 @@ needs_motion_vectors = false
 needs_normal_roughness = false
 script = ExtResource("2_0wfyh")
 grain_amount = 0.08
+grain_size = 1.0
 
 [sub_resource type="Compositor" id="Compositor_jyhfs"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_0wfyh")])

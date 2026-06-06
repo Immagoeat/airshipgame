@@ -20,16 +20,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
 
-	if event.is_action_pressed("esc") and not esc_cooldown:
-		esc_cooldown = true
+	if event.is_action_pressed("esc"):
 		if mousemode:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			mousemode = false
-		else:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-			mousemode = true
-		await get_tree().create_timer(0.2).timeout
-		esc_cooldown = false
+			get_tree().change_scene_to_file("res://scenes/pausemenu.tscn")
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

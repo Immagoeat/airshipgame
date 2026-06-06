@@ -2,8 +2,8 @@
 extends CompositorEffect
 class_name FilmGrainEffect
 
-@export var grain_amount: float = 0.15
-@export var grain_size: float = 1.0
+@export var grain_amount: float = 0.001
+@export var grain_size: float = 0.05
 
 var rd: RenderingDevice
 var shader: RID
