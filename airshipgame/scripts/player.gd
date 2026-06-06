@@ -1,47 +1,57 @@
 extends CharacterBody3D
 
-
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-const SENSITIVITY = 100
-var mouselocked: bool = true
+const MOUSE_SENSITIVITY = 0.003
+const RUN_SPEED = 7.5
+
+var mousemode: bool = true
+var esc_cooldown: bool = false
+
+@onready var camera: Camera3D = $Camera3D
 
 func _ready() -> void:
-	
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion and mousemode:
+		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
+		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
+		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+
+	if event.is_action_pressed("esc") and not esc_cooldown:
+		esc_cooldown = true
+		if mousemode:
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			mousemode = false
+		else:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			mousemode = true
+		await get_tree().create_timer(0.2).timeout
+		esc_cooldown = false
 
 func _physics_process(delta: float) -> void:
-	
-	if Input.is_action_just_pressed("esc") and mouselocked:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-		mouselocked = false
-		print(mouselocked)
-		await get_tree().create_timer(0.1).timeout
-		
-	if Input.is_action_just_pressed("esc") and not mouselocked:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-		mouselocked = true
-		print(mouselocked)
-		await get_tree().create_timer(0.1).timeout
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("space") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
-	# Get camera rotation
-	
-	
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("left", "right", "up", "down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
+	var speed = RUN_SPEED if Input.is_action_pressed("shift") else SPEED
+	var input_dir = Input.get_vector("left", "right", "up", "down")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		if is_on_floor():
+			velocity.x = direction.x * speed
+			velocity.z = direction.z * speed
+		else:
+			pass
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+		if is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
+		else:
+			pass
 
 	move_and_slide()
