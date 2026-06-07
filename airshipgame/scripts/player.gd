@@ -38,17 +38,12 @@ func _physics_process(delta: float) -> void:
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	if direction:
-		if is_on_floor():
-			velocity.x = direction.x * speed
-			velocity.z = direction.z * speed
-		else:
-			pass
+		velocity.x = direction.x * speed
+		velocity.z = direction.z * speed
+
 	else:
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.z = move_toward(velocity.z, 0, SPEED)
-		else:
-			pass
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
 			
 	var is_moving = Vector2(velocity.x, velocity.z).length() > 0.1
 	if is_moving and is_on_floor():
