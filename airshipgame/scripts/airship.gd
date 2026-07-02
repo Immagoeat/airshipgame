@@ -12,4 +12,4 @@ func _ready() -> void:
 func _process(delta):
 	if player.is_locked:
 		if Input.is_action_pressed("space"):
-			translate(Vector3(0,2,0))
+			velocity.y = upwardspeed * delta
