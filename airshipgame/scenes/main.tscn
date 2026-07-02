@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://8wj7mobdfg1n" path="res://scenes/player.tscn" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://gp342a7xwuue" path="res://scripts/filmgrain.gd" id="2_0wfyh"]
+[ext_resource type="PackedScene" uid="uid://3bp76eanott8" path="res://models/airship.tscn" id="3_sugp2"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o5qli"]
 bounce = 0.1
@@ -42,6 +43,7 @@ grain_size = 1.0
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_0wfyh")])
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0wfyh"]
+friction = 0.2
 bounce = 0.3
 absorbent = true
 
@@ -76,13 +78,16 @@ compositor = SubResource("Compositor_jyhfs")
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1893734922]
 transform = Transform3D(1, 0, 0, 0, 0.4170106, 0.90890163, 0, -0.90890163, 0.4170106, 0, 299.4047, 0)
 
-[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=637929381]
+[node name="Blue box" type="RigidBody3D" parent="." unique_id=637929381]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 37.807247, 0)
-mass = 0.005
+mass = 0.001
 physics_material_override = SubResource("PhysicsMaterial_0wfyh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=1246409159]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Blue box" unique_id=1246409159]
 shape = SubResource("BoxShape3D_sugp2")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=2058253085]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Blue box" unique_id=2058253085]
 mesh = SubResource("BoxMesh_tbgi4")
+
+[node name="Airship" parent="." unique_id=688934559 instance=ExtResource("3_sugp2")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 16.558313, 30.559952, 0.70604277)

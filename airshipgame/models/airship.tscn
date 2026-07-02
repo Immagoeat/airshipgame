@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://3bp76eanott8"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7s3uy"]
+
+[node name="Airship" type="Node3D" unique_id=688934559]
+
+[node name="Supports" type="Node3D" parent="." unique_id=434414386]
+
+[node name="back left support" type="CSGBox3D" parent="Supports" unique_id=480218370]
+transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, -1.1300255, 0.4831617, -0.18396497)
+use_collision = true
+size = Vector3(0.060058594, 1, 1)
+
+[node name="back right support" type="CSGBox3D" parent="Supports" unique_id=1329575999]
+transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, -1.13, 0.483, 0.184)
+use_collision = true
+size = Vector3(0.060058594, 1, 1)
+
+[node name="front left support" type="CSGBox3D" parent="Supports" unique_id=962212818]
+transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, 0.8810966, 0.4831617, -0.4845655)
+use_collision = true
+size = Vector3(0.060058594, 1, 1)
+
+[node name="front right support" type="CSGBox3D" parent="Supports" unique_id=1500433308]
+transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, 0.8808538, 0.483, 0.48)
+use_collision = true
+size = Vector3(0.060058594, 1, 1)
+
+[node name="Balloon" type="Node3D" parent="." unique_id=489070748]
+
+[node name="balloon" type="CSGMesh3D" parent="Balloon" unique_id=354005613]
+transform = Transform3D(-4.3711385e-08, 1.6624998, 0, -0.99999994, -7.267017e-08, 0, 0, 0, 1.231045, -0.10231817, 1.255915, 0)
+use_collision = true
+mesh = SubResource("CapsuleMesh_7s3uy")
+
+[node name="Balloon rings" type="Node3D" parent="Balloon" unique_id=723439622]
+
+[node name="ring1" type="CSGTorus3D" parent="Balloon/Balloon rings" unique_id=1187430807]
+transform = Transform3D(-2.4041263e-08, 0.55, 0, -0.55, -2.4041263e-08, 0, 0, 0, 0.6303668, -0.6782368, 1.2645699, 0)
+sides = 64
+ring_sides = 64
+
+[node name="ring2" type="CSGTorus3D" parent="Balloon/Balloon rings" unique_id=1852373948]
+transform = Transform3D(-2.4041263e-08, 0.55, 0, -0.55, -2.4041263e-08, 0, 0, 0, 0.6303668, 0, 1.265, 0)
+sides = 64
+ring_sides = 64
+
+[node name="ring3" type="CSGTorus3D" parent="Balloon/Balloon rings" unique_id=2013891541]
+transform = Transform3D(-2.4041263e-08, 0.55, 0, -0.55, -2.4041263e-08, 0, 0, 0, 0.6303668, 0.67, 1.265, 0)
+sides = 64
+ring_sides = 64
+
+[node name="Floor" type="Node3D" parent="." unique_id=1019042941]
+
+[node name="floor" type="CSGBox3D" parent="Floor" unique_id=2041811170]
+transform = Transform3D(1, 0, 0, 0, 0.04205066, 0, 0, 0, 1, -0.12246704, 0, 0)
+use_collision = true
+size = Vector3(2.0342407, 1, 1)
+
+[node name="Control room" type="Node3D" parent="." unique_id=851916454]
+
+[node name="Outside" type="CSGBox3D" parent="Control room" unique_id=1754827749]
+transform = Transform3D(0.5439956, 0, 0, 0, 1, 0, 0, 0, 0.7259146, 0.59746814, 0.24926758, 0)
+use_collision = true
+size = Vector3(1, 0.50146484, 1)
+
+[node name="Inside" type="CSGBox3D" parent="Control room/Outside" unique_id=1215908748]
+transform = Transform3D(0.90032977, 0, 0, 0, 0.91837907, 0, 0, 0, 0.9011229, 0, 0, 0)
+operation = 2
+size = Vector3(1, 0.50146484, 1)
+
+[node name="WinshieldC" type="CSGBox3D" parent="Control room/Outside" unique_id=813133883]
+transform = Transform3D(0.15441442, 0, 0, 0, 0.5265487, 0, 0, 0, 0.7418879, 0.47266293, 0.0360353, 0)
+operation = 2
+size = Vector3(1, 0.50146484, 1)
+
+[node name="WinshieldL+R" type="CSGBox3D" parent="Control room/Outside" unique_id=38385556]
+transform = Transform3D(0.77413344, 0, 0, 0, 0.5265487, 0, 0, 0, 1.1503451, 0.0043411255, 0.0360353, 0)
+operation = 2
+size = Vector3(1, 0.50146484, 1)
+
+[node name="Door" type="CSGBox3D" parent="Control room/Outside" unique_id=593827889]
+transform = Transform3D(0.20598929, 0, 0, 0, 0.50796884, 0, 0, 0, 0.2647841, -0.451, -0.098, 0)
+operation = 2
+size = Vector3(1, 0.5119629, 1)
