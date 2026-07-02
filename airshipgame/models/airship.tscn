@@ -1,8 +1,19 @@
 [gd_scene format=3 uid="uid://3bp76eanott8"]
 
+[ext_resource type="Script" uid="uid://cxhthdawokihk" path="res://models/wheel.gd" id="1_20gbn"]
+[ext_resource type="Script" uid="uid://3cdlww6ri1jb" path="res://models/airship.gd" id="1_at44t"]
+[ext_resource type="Script" uid="uid://cqo30eomvsf5o" path="res://models/fly_range.gd" id="3_vrpcb"]
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7s3uy"]
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_7s3uy"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_20gbn"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_at44t"]
+
 [node name="Airship" type="Node3D" unique_id=688934559]
+script = ExtResource("1_at44t")
 
 [node name="Supports" type="Node3D" parent="." unique_id=434414386]
 
@@ -83,3 +94,71 @@ size = Vector3(1, 0.50146484, 1)
 transform = Transform3D(0.20598929, 0, 0, 0, 0.50796884, 0, 0, 0, 0.2647841, -0.451, -0.098, 0)
 operation = 2
 size = Vector3(1, 0.5119629, 1)
+
+[node name="Inside" type="Node3D" parent="Control room" unique_id=1951199674]
+
+[node name="Wheel" type="CSGMesh3D" parent="Control room/Inside" unique_id=164271245]
+transform = Transform3D(-3.059797e-09, -0.011, 0, 0.07, -4.8082527e-10, 0, 0, 0, 0.07, 0.7183526, 0.13787451, 0)
+use_collision = true
+mesh = SubResource("CylinderMesh_7s3uy")
+script = ExtResource("1_20gbn")
+
+[node name="Handles" type="Node3D" parent="Control room/Inside/Wheel" unique_id=1155756141]
+transform = Transform3D(-4.3711384e-07, 9.999999, 0, -58.823524, -2.571258e-06, 0, 0, 0, 9.999999, -2.0769513, 5.3403784e-07, 0)
+
+[node name="Handle" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=302431238]
+transform = Transform3D(0.0142508205, 0, 0, 0, 0.030313537, 0, 0, 0, 0.016039308, 0, 0.28287917, 0)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Handle3" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=940314225]
+transform = Transform3D(0.0142508205, 0, 0, 0, -1.3250467e-09, -0.016039308, 0, 0.030313537, -7.011004e-10, 0, 0.21031618, 0.07829189)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Handle7" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=885383500]
+transform = Transform3D(0.0142508205, 0, 0, 0, -0.021434907, -0.011341504, 0, 0.021434907, -0.011341504, 0, 0.15653068, 0.059907064)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Handle8" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=236540876]
+transform = Transform3D(0.0142508205, 0, 0, 0, -0.021434907, -0.011341504, 0, 0.021434907, -0.011341504, 0, 0.2597074, -0.0563107)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Handle2" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=157736820]
+transform = Transform3D(0.0142508205, 0, 0, 0, 0.021434907, -0.011341504, 0, 0.021434907, 0.011341504, 0, 0.26624334, 0.053577445)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Handle4" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=402419395]
+transform = Transform3D(0.014250821, 0, 0, 0, 0.030313538, 0, 0, 0, 0.016039308, -0.0045548324, 0.13392694, 0.0003197044)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Handle5" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=1019648894]
+transform = Transform3D(2.7228837e-17, -1.3250467e-09, 0.01603931, -0.014250821, -1.3250467e-09, 0, 6.229232e-10, -0.030313535, -7.011005e-10, 0.0008975975, 0.2046773, -0.07564118)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Handle6" type="CSGMesh3D" parent="Control room/Inside/Wheel/Handles" unique_id=680897637]
+transform = Transform3D(0.013855136, 0.0008805776, 0.003724326, -0.0020471213, -0.021499047, 0.011070239, 0.0026325663, -0.021352425, -0.010992663, -0.000104095205, 0.14966783, -0.05210686)
+use_collision = true
+mesh = SubResource("CylinderMesh_20gbn")
+
+[node name="Fly range" type="Area3D" parent="Control room/Inside/Wheel" unique_id=257476617]
+transform = Transform3D(3.445, 0, 0, 0, 3.44, 0, 0, 0, 3.44, 0, -0.016975403, 0)
+script = ExtResource("3_vrpcb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Control room/Inside/Wheel/Fly range" unique_id=205392979]
+shape = SubResource("SphereShape3D_at44t")
+
+[node name="Wheel connector" type="Node3D" parent="Control room/Inside" unique_id=899525268]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Control room/Inside/Wheel connector" unique_id=543722345]
+transform = Transform3D(0.05999712, -3.4610953e-11, 0, -2.145728e-10, 0.010469448, 0, 0, 0, 0.11068715, 0.72518945, 0.024392195, 0)
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Control room/Inside/Wheel connector" unique_id=303930356]
+transform = Transform3D(0.009345454, -3.8439296e-10, 0, -3.342296e-11, 0.11627481, 0, 0, 0, 0.026865792, 0.7329154, 0.08299562, 0)
+use_collision = true
