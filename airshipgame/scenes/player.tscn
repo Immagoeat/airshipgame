@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://8wj7mobdfg1n"]
 
 [ext_resource type="Script" uid="uid://bmrxirsfth0e3" path="res://scripts/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://bfi7pqpvlcjyo" path="res://scripts/label.gd" id="2_g2els"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sh265"]
 
@@ -58,5 +59,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38596737, 0)
 [node name="bob" type="AnimationPlayer" parent="." unique_id=2098185812]
 libraries/ = SubResource("AnimationLibrary_qhqgy")
 autoplay = &"bobbing"
+
+[node name="FPS" type="Label" parent="." unique_id=1067718221]
+offset_right = 128.0
+offset_bottom = 46.0
+script = ExtResource("2_g2els")
 
 [connection signal="mixer_applied" from="bob" to="." method="_on_animation_player_mixer_applied"]

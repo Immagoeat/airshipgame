@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://3bp76eanott8"]
 
-[ext_resource type="Script" uid="uid://cxhthdawokihk" path="res://models/wheel.gd" id="1_20gbn"]
-[ext_resource type="Script" uid="uid://3cdlww6ri1jb" path="res://models/airship.gd" id="1_at44t"]
-[ext_resource type="Script" uid="uid://cqo30eomvsf5o" path="res://models/fly_range.gd" id="3_vrpcb"]
+[ext_resource type="Script" uid="uid://cxhthdawokihk" path="res://scripts/wheel.gd" id="1_20gbn"]
+[ext_resource type="Script" uid="uid://3cdlww6ri1jb" path="res://scripts/airship.gd" id="1_at44t"]
+[ext_resource type="Script" uid="uid://cqo30eomvsf5o" path="res://scripts/fly_range.gd" id="3_vrpcb"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7s3uy"]
 
@@ -147,11 +147,14 @@ use_collision = true
 mesh = SubResource("CylinderMesh_20gbn")
 
 [node name="Fly range" type="Area3D" parent="Control room/Inside/Wheel" unique_id=257476617]
-transform = Transform3D(3.445, 0, 0, 0, 3.44, 0, 0, 0, 3.44, 0, -0.016975403, 0)
+transform = Transform3D(3.445, 7.1054274e-15, 0, -1.1368684e-13, 14.327501, 0, 0, 0, 3.4399998, 0, -0.016975403, 0)
 script = ExtResource("3_vrpcb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Control room/Inside/Wheel/Fly range" unique_id=205392979]
 shape = SubResource("SphereShape3D_at44t")
+
+[node name="Teleport point" type="Marker3D" parent="Control room/Inside/Wheel/Fly range" unique_id=683479146]
+transform = Transform3D(-1.8126221e-07, 4.146799, 0, -6.3450766, -2.7735217e-07, 0, 0, 0, 4.1528263, 0, 0.751, 0)
 
 [node name="Wheel connector" type="Node3D" parent="Control room/Inside" unique_id=899525268]
 
