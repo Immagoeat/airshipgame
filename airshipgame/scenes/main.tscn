@@ -68,7 +68,7 @@ physics_material_override = SubResource("PhysicsMaterial_o5qli")
 shape = SubResource("BoxShape3D_0wfyh")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Big Box/CollisionShape3D" unique_id=1235920450]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0038208961, 0, 0)
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0.0039379597, -0.00037463504, -0.001135985)
 mesh = SubResource("BoxMesh_sugp2")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=915799016]
@@ -90,4 +90,4 @@ shape = SubResource("BoxShape3D_sugp2")
 mesh = SubResource("BoxMesh_tbgi4")
 
 [node name="Airship" parent="." unique_id=688934559 instance=ExtResource("3_sugp2")]
-transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 16.558313, 30.559952, 0.70604277)
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 16.782927, 30.423763, -0.8438206)
