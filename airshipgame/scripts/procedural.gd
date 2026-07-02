@@ -1,8 +1,8 @@
 extends Node3D
 
-@export var height: int = 32
-@export var width: int = 32
-@export var depth: int = 32
+@export var height: int = 64
+@export var width: int = 64
+@export var depth: int = 12
 @export var fill_threshold: float = 0.0
 
 var noise: FastNoiseLite = FastNoiseLite.new()

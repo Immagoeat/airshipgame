@@ -1,6 +1,22 @@
 [gd_scene format=3 uid="uid://cpmsjn4syiytc"]
 
 [ext_resource type="Script" uid="uid://cjqqeiuw4w7cc" path="res://scripts/procedural.gd" id="1_jj1dx"]
+[ext_resource type="PackedScene" uid="uid://8wj7mobdfg1n" path="res://scenes/player.tscn" id="2_1qsel"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1qsel"]
+
+[sub_resource type="Sky" id="Sky_3va33"]
+sky_material = SubResource("ProceduralSkyMaterial_1qsel")
+
+[sub_resource type="Environment" id="Environment_axrf0"]
+background_mode = 2
+sky = SubResource("Sky_3va33")
 
 [node name="Node3D" type="Node3D" unique_id=380189381]
 script = ExtResource("1_jj1dx")
+
+[node name="Player" parent="." unique_id=2088449081 instance=ExtResource("2_1qsel")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0641314, 46.040115, -1.9657621)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=870695687]
+environment = SubResource("Environment_axrf0")
