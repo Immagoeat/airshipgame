@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://ufttkrc77wfg"]
+
+[ext_resource type="PackedScene" uid="uid://8wj7mobdfg1n" path="res://scenes/player.tscn" id="1_2rrnh"]
+[ext_resource type="PackedScene" uid="uid://3bp76eanott8" path="res://models/airship.tscn" id="2_k5gqu"]
+
+[node name="Node3D" type="Node3D" unique_id=720770316]
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1547344657]
+transform = Transform3D(6.1959524, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+size = Vector3(4, 1, 35)
+
+[node name="Player" parent="." unique_id=2088449081 instance=ExtResource("1_2rrnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4360504, 2.4269521, -0.06038916)
+
+[node name="Airship" parent="." unique_id=688934559 instance=ExtResource("2_k5gqu")]
+transform = Transform3D(-3.496911e-07, 0, -8, 0, 8, 0, 8, 0, -3.496911e-07, -7.894084, 2.9122276, 3.2786036)
+
+[node name="Spwanplatform" type="Node3D" parent="." unique_id=1878224486]
+
+[node name="ShipSpawnPlatform" type="CSGBox3D" parent="Spwanplatform" unique_id=764901118]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.893621, 0.8617201, 4.6205444)
+size = Vector3(9.021989, 0.60131836, 24.23523)
+
+[node name="ShipSpawnPlatform4" type="CSGBox3D" parent="Spwanplatform" unique_id=1067299277]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8928514, 2.1700087, -7.291046)
+size = Vector3(8.354173, 2.0667725, 0.41204834)
+
+[node name="ShipSpawnPlatform2" type="CSGBox3D" parent="Spwanplatform" unique_id=557178547]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.237677, 2.1788917, 4.6166077)
+size = Vector3(0.33387852, 2.0223389, 24.243103)
+
+[node name="ShipSpawnPlatform3" type="CSGBox3D" parent="Spwanplatform" unique_id=151860815]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5408077, 2.1808448, 4.6250153)
+size = Vector3(0.33387852, 2.0184326, 24.226288)
+
+[node name="Stair" type="Node3D" parent="Spwanplatform" unique_id=878217858]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Spwanplatform/Stair" unique_id=1093655929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.840775, 1.6563864, -0.0039590597)
+size = Vector3(0.9013672, 3.0922852, 3.8857422)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Spwanplatform/Stair" unique_id=1442612200]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9553233, 1.4917746, -0.0039590597)
+size = Vector3(0.9013672, 2.7630615, 3.8857422)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Spwanplatform/Stair" unique_id=199457443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0593483, 1.342269, -0.0039590597)
+size = Vector3(0.9013672, 2.4640503, 3.8857422)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Spwanplatform/Stair" unique_id=1115768040]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1492604, 1.2042227, -0.0039590597)
+size = Vector3(0.9013672, 2.1879578, 3.8857422)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Spwanplatform/Stair" unique_id=1295989296]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.565985, 1.0773993, -0.0039590597)
+size = Vector3(2.5405273, 1.9343109, 3.8857422)
