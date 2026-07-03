@@ -4,75 +4,77 @@ extends Node3D
 @onready var onship: Area3D = $onship
 
 var player
-var attached_player: CharacterBody3D = null
-
-var isonground := false
+var isonship := false
 var isdownlocked := false
 
 var upwardspeed = 1
 var downwardspeed = -2
-var movementspeed = 1
-var engine = 2
-var isonship = false
-var total_movement = 0
+var movementspeed = 0.1
+var engine = 1
+
+var max_speed: float = 1
+var acceleration: float = 0.2
+var current_speed: float = 0.0
 
 
-var velocity: Vector3 = Vector3.ZERO
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if player.is_locked:
-		if Input.is_action_pressed("space"):
-			velocity.y = upwardspeed
-			global_position.y += velocity.y * delta
-			
-		if Input.is_action_pressed("ctrl"):
-			if not isdownlocked:
-				velocity.y = downwardspeed
-				global_position.y += velocity.y * delta
-			else:
-				pass
-			
-		if Input.is_action_pressed("up"):
-			velocity.x = movementspeed
-			total_movement = velocity.x * engine * delta
-			global_position.x += total_movement
-			if isonship:
-				player.global_position.x += total_movement
+func _physics_process(delta: float) -> void:
+	if not player.is_locked:
+		current_speed = 0.0
+		return
 
-func lockdownwards():
+
+	var old_transform: Transform3D = global_transform
+
+
+	if Input.is_action_pressed("space"):
+		global_position.y += upwardspeed * delta
+
+	if Input.is_action_pressed("ctrl") and not isdownlocked:
+		global_position.y += downwardspeed * delta
+
+
+	var forward: Vector3 = global_transform.basis.x 
+
+	if Input.is_action_pressed("up"):
+		global_position += forward * movementspeed * engine * delta
+
+	if Input.is_action_pressed("down"):
+		global_position -= forward * movementspeed * engine * delta
+
+	var turning_right := Input.is_action_pressed("right")
+	var turning_left := Input.is_action_pressed("left")
+
+	if turning_right or turning_left:
+		current_speed = minf(current_speed + acceleration * delta, max_speed)
+		if turning_right:
+			rotate_y(-current_speed * delta)
+		if turning_left:
+			rotate_y(current_speed * delta)
+	else:
+		current_speed = 0.0
+
+	if isonship and player:
+		var delta_transform: Transform3D = global_transform * old_transform.affine_inverse()
+		player.global_transform = delta_transform * player.global_transform
+
+
+func lockdownwards() -> void:
 	isdownlocked = true
-	
-func unlockdownwards():
+
+
+func unlockdownwards() -> void:
 	isdownlocked = false
 
-func _on_onship_body_entered(body):
+
+func _on_onship_body_entered(body) -> void:
 	if body.is_in_group("player"):
 		isonship = true
-		attached_player = body
-		var original_transform = attached_player.global_transform
-		
-		attached_player.get_parent().remove_child(attached_player)
-		add_child(attached_player)
-		
-		attached_player.global_transform = original_transform
 
-func _on_onship_body_exited(body):
+
+func _on_onship_body_exited(body) -> void:
 	if body.is_in_group("player"):
 		isonship = false
-
-var max_speed: float = 10.0
-var acceleration: float = 1.0
-
-var current_speed: float = 0.0
-
-func _physics_process(delta: float) -> void:
-	if Input.is_action_pressed("right"):
-		if player.is_locked:
-			current_speed += acceleration * delta
-			current_speed = minf(current_speed, max_speed)
-			rotate_y(current_speed * delta)
