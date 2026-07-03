@@ -199,5 +199,7 @@ shape = SubResource("BoxShape3D_vrpcb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12322998, 0.5756836, -0.0015869141)
 shape = SubResource("BoxShape3D_8lp1e")
 
+[connection signal="body_entered" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_exited"]
 [connection signal="body_entered" from="onship" to="." method="_on_onship_body_entered"]
 [connection signal="body_exited" from="onship" to="." method="_on_onship_body_exited"]

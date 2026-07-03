@@ -38,9 +38,9 @@ compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_0wfy
 [node name="Node3D" type="Node3D" unique_id=720770316]
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1547344657]
-transform = Transform3D(6.1959524, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(6.1959524, 0, 0, 0, 1, 0, 0, 0, 1, 4.595155, 0, -4.8757324)
 use_collision = true
-size = Vector3(4, 1, 35)
+size = Vector3(5.4832764, 1, 44.751465)
 
 [node name="Player" parent="." unique_id=2088449081 instance=ExtResource("1_2rrnh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4360504, 2.4269521, -0.06038916)
