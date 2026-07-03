@@ -16,6 +16,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_vrpcb"]
 size = Vector3(2.0336227, 0.001, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_8lp1e"]
+size = Vector3(2.0377197, 1.1943359, 1.0031738)
+
 [node name="Airship" type="Node3D" unique_id=688934559]
 script = ExtResource("1_at44t")
 
@@ -173,3 +176,12 @@ script = ExtResource("4_8lp1e")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Istouchingground" unique_id=572794279]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12226486, -0.022306986, 0)
 shape = SubResource("BoxShape3D_vrpcb")
+
+[node name="onship" type="Area3D" parent="." unique_id=469024135]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="onship" unique_id=369351494]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12322998, 0.5756836, -0.0015869141)
+shape = SubResource("BoxShape3D_8lp1e")
+
+[connection signal="body_entered" from="onship" to="." method="_on_onship_body_entered"]
+[connection signal="body_exited" from="onship" to="." method="_on_onship_body_exited"]
