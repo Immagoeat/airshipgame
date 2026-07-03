@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxhthdawokihk" path="res://scripts/wheel.gd" id="1_20gbn"]
 [ext_resource type="Script" uid="uid://3cdlww6ri1jb" path="res://scripts/airship.gd" id="1_at44t"]
 [ext_resource type="Script" uid="uid://cqo30eomvsf5o" path="res://scripts/fly_range.gd" id="3_vrpcb"]
-[ext_resource type="Script" uid="uid://q2xidee2by64" path="res://scripts/teleport_point.gd" id="4_8lp1e"]
+[ext_resource type="Script" uid="uid://bfrexajj1slom" path="res://scripts/isairshiptouchingground.gd" id="4_8lp1e"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7s3uy"]
 
@@ -12,6 +12,9 @@
 [sub_resource type="CylinderMesh" id="CylinderMesh_20gbn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_at44t"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vrpcb"]
+size = Vector3(2.0336227, 0.001, 1)
 
 [node name="Airship" type="Node3D" unique_id=688934559]
 script = ExtResource("1_at44t")
@@ -154,10 +157,6 @@ script = ExtResource("3_vrpcb")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Control room/Inside/Wheel/Fly range" unique_id=205392979]
 shape = SubResource("SphereShape3D_at44t")
 
-[node name="Teleport point" type="Marker3D" parent="Control room/Inside/Wheel/Fly range" unique_id=683479146]
-transform = Transform3D(-1.8126221e-07, 4.1468005, 0, -6.3450766, -2.7735226e-07, 0, 0, 0, 4.1528277, 0, 0.75100064, 0)
-script = ExtResource("4_8lp1e")
-
 [node name="Wheel connector" type="Node3D" parent="Control room/Inside" unique_id=899525268]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Control room/Inside/Wheel connector" unique_id=543722345]
@@ -167,3 +166,10 @@ use_collision = true
 [node name="CSGBox3D2" type="CSGBox3D" parent="Control room/Inside/Wheel connector" unique_id=303930356]
 transform = Transform3D(0.009345454, -3.8439296e-10, 0, -3.342296e-11, 0.11627481, 0, 0, 0, 0.026865792, 0.7329154, 0.08299562, 0)
 use_collision = true
+
+[node name="Istouchingground" type="Area3D" parent="." unique_id=622256886]
+script = ExtResource("4_8lp1e")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Istouchingground" unique_id=572794279]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12226486, -0.022306986, 0)
+shape = SubResource("BoxShape3D_vrpcb")

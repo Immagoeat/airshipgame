@@ -9,6 +9,8 @@ var mousemode: bool = true
 var esc_cooldown: bool = false
 var is_locked: bool = false
 
+var current_vehicle = null
+
 @onready var camera: Camera3D = $Camera3D
 @onready var anim: AnimationPlayer = $bob
 
@@ -29,9 +31,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			get_tree().change_scene_to_file("res://scenes/pausemenu.tscn")
 
 func _physics_process(delta: float) -> void:
+	
+	if current_vehicle != null:
+		global_transform = current_vehicle.global_transform
+		
 	if is_locked:
 		if Input.is_action_pressed("shift"):
 			unlock()
+		
 		velocity.x = 0
 		velocity.z = 0
 		if not is_on_floor():
@@ -71,6 +78,7 @@ func _physics_process(delta: float) -> void:
 	
 func lock():
 	is_locked = true
+
 
 func unlock():
 	is_locked = false
