@@ -4,7 +4,8 @@
 [ext_resource type="Script" uid="uid://3cdlww6ri1jb" path="res://scripts/airship.gd" id="1_at44t"]
 [ext_resource type="Script" uid="uid://cqo30eomvsf5o" path="res://scripts/fly_range.gd" id="3_vrpcb"]
 [ext_resource type="Script" uid="uid://bfrexajj1slom" path="res://scripts/isairshiptouchingground.gd" id="4_8lp1e"]
-[ext_resource type="Script" uid="uid://di2bmv61o5vb0" path="res://models/engine.gd" id="4_kso20"]
+[ext_resource type="Script" uid="uid://di2bmv61o5vb0" path="res://scripts/engine.gd" id="4_kso20"]
+[ext_resource type="Script" uid="uid://lmkpdmt5fumd" path="res://scripts/lights.gd" id="6_w82rg"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7s3uy"]
 
@@ -199,7 +200,18 @@ shape = SubResource("BoxShape3D_vrpcb")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.12322998, 0.5756836, -0.0015869141)
 shape = SubResource("BoxShape3D_8lp1e")
 
+[node name="Lights" type="Node3D" parent="." unique_id=1822230088]
+script = ExtResource("6_w82rg")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights" unique_id=212597002]
+transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.7071068, -0.5, 0.5, 0.82585996, 0.4436091, 0.29781622)
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=1380726699]
+transform = Transform3D(-0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, 0.49999997, -0.49999997, 0.82585996, 0.4436091, -0.2909283)
+
 [connection signal="body_entered" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_exited"]
+[connection signal="body_entered" from="Istouchingground" to="Istouchingground" method="_on_body_entered"]
+[connection signal="body_exited" from="Istouchingground" to="Istouchingground" method="_on_body_exited"]
 [connection signal="body_entered" from="onship" to="." method="_on_onship_body_entered"]
 [connection signal="body_exited" from="onship" to="." method="_on_onship_body_exited"]

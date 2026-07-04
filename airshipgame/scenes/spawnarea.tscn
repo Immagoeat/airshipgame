@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://8wj7mobdfg1n" path="res://scenes/player.tscn" id="1_2rrnh"]
 [ext_resource type="PackedScene" uid="uid://3bp76eanott8" path="res://models/airship.tscn" id="2_k5gqu"]
 [ext_resource type="Script" uid="uid://gp342a7xwuue" path="res://scripts/filmgrain.gd" id="3_k5gqu"]
+[ext_resource type="Script" uid="uid://dqlepa1qk10hf" path="res://scripts/daycycle.gd" id="4_l3lx2"]
+[ext_resource type="Script" uid="uid://l2rokk1pd0yn" path="res://scripts/isinshoparea.gd" id="5_ttb4t"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_l3lx2"]
 
@@ -34,6 +36,11 @@ grain_size = 1.0
 
 [sub_resource type="Compositor" id="Compositor_oirpk"]
 compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_0wfyh")])
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oirpk"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0bv7f"]
 
 [node name="Node3D" type="Node3D" unique_id=720770316]
 
@@ -87,9 +94,36 @@ transform = Transform3D(0.96682787, 0.25542888, 0, -0.25542888, 0.96682787, 0, 0
 use_collision = true
 size = Vector3(4.56192, 2.642211, 3.8847656)
 
-[node name="WorldEnvironment2" type="WorldEnvironment" parent="." unique_id=514286980]
+[node name="Sky" type="WorldEnvironment" parent="." unique_id=514286980]
 environment = SubResource("Environment_ttb4t")
 compositor = SubResource("Compositor_oirpk")
+script = ExtResource("4_l3lx2")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment2" unique_id=1344593580]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Sky" unique_id=1344593580]
 transform = Transform3D(1, 0, 0, 0, 0.03278891, 0.9994623, 0, -0.9994623, 0.03278891, 0, 63.280003, 0)
+
+[node name="Testshop" type="Node3D" parent="." unique_id=1463175402]
+
+[node name="Box" type="CSGBox3D" parent="Testshop" unique_id=515230462]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 15.50186, 3.502317, -18.757288)
+use_collision = true
+
+[node name="Ring" type="CSGTorus3D" parent="Testshop" unique_id=1871836706]
+transform = Transform3D(3.8327458, 0, 0, 0, 1, 0, 0, 0, 3.9252145, 11.850481, 0.4317552, -18.765293)
+transparency = 0.19
+inner_radius = 0.6808052
+sides = 64
+ring_sides = 64
+material = SubResource("StandardMaterial3D_oirpk")
+
+[node name="Text" type="Label3D" parent="Testshop" unique_id=344242840]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 12.424511, 4.0124817, -19.288437)
+pixel_size = 0.05
+text = "Shop"
+
+[node name="Isinarea" type="Area3D" parent="Testshop" unique_id=753208549]
+script = ExtResource("5_ttb4t")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Testshop/Isinarea" unique_id=1058539547]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 10.532034, 1.1026653, -18.8396)
+shape = SubResource("SphereShape3D_0bv7f")
