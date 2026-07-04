@@ -12,6 +12,9 @@ uniform float saturation_amount : hint_range(0.0, 1.0) = 0.4;
 // Negative values push it LOWER, positive values pull it HIGHER
 uniform float horizon_offset : hint_range(-2.0, 2.0) = -0.3;
 
+uniform float star_density : hint_range(0.0, 1.0) = 0.4;
+uniform float star_threshold : hint_range(0.8, 1.0) = 0.96;
+
 void sky() {
     // 1. Calculate view height with the new horizon offset bias
     // We use a high multiplier (e.g., 4.0) to keep the horizon transition sharp

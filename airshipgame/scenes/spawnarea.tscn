@@ -1,12 +1,36 @@
 [gd_scene format=3 uid="uid://ufttkrc77wfg"]
 
+[ext_resource type="Texture2D" uid="uid://cvsnx6ojs8fdf" path="res://textures/concrete.jpg" id="1_0bv7f"]
 [ext_resource type="PackedScene" uid="uid://8wj7mobdfg1n" path="res://scenes/player.tscn" id="1_2rrnh"]
 [ext_resource type="PackedScene" uid="uid://3bp76eanott8" path="res://models/airship.tscn" id="2_k5gqu"]
 [ext_resource type="Script" uid="uid://gp342a7xwuue" path="res://scripts/filmgrain.gd" id="3_k5gqu"]
+[ext_resource type="Shader" uid="uid://c80lsj0vtu5ct" path="res://shaders/sky.gdshader" id="3_oirpk"]
 [ext_resource type="Script" uid="uid://dqlepa1qk10hf" path="res://scripts/daycycle.gd" id="4_l3lx2"]
 [ext_resource type="Script" uid="uid://l2rokk1pd0yn" path="res://scripts/isinshoparea.gd" id="5_ttb4t"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uj7lx"]
+albedo_texture = ExtResource("1_0bv7f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_swebp"]
+albedo_texture = ExtResource("1_0bv7f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bwti8"]
+albedo_texture = ExtResource("1_0bv7f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5geal"]
+albedo_texture = ExtResource("1_0bv7f")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0bv7f"]
+shader = ExtResource("3_oirpk")
+shader_parameter/day_sky = Color(0, 0, 0, 1)
+shader_parameter/day_horizon = Color(0, 0, 0, 1)
+shader_parameter/night_sky = Color(0, 0, 0, 1)
+shader_parameter/night_horizon = Color(0, 0, 0, 1)
+shader_parameter/sun_direction = Vector3(0, 0, 0)
+shader_parameter/saturation_amount = 0.4
+shader_parameter/horizon_offset = -0.3
+shader_parameter/star_density = 0.4
+shader_parameter/star_threshold = 0.96
 
 [sub_resource type="Sky" id="Sky_0wfyh"]
 sky_material = SubResource("ShaderMaterial_0bv7f")
@@ -17,7 +41,6 @@ background_mode = 2
 sky = SubResource("Sky_0wfyh")
 ssr_enabled = true
 ssr_max_steps = 48
-fog_enabled = true
 fog_density = 0.0409
 fog_sky_affect = 0.196
 volumetric_fog_enabled = true
@@ -49,6 +72,7 @@ albedo_color = Color(0, 0, 1, 1)
 transform = Transform3D(6.1959524, 0, 0, 0, 1, 0, 0, 0, 1, 4.595155, 0, -4.8757324)
 use_collision = true
 size = Vector3(5.4832764, 1, 44.751465)
+material = SubResource("StandardMaterial3D_uj7lx")
 
 [node name="Player" parent="." unique_id=2088449081 instance=ExtResource("1_2rrnh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4360504, 2.4269521, -0.06038916)
@@ -64,9 +88,9 @@ use_collision = true
 size = Vector3(9.021989, 0.60131836, 24.975525)
 
 [node name="ShipSpawnPlatform4" type="CSGBox3D" parent="Spwanplatform" unique_id=1067299277]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8928514, 2.1700087, -7.291046)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.8928514, 2.1700087, -6.714798)
 use_collision = true
-size = Vector3(8.354173, 2.0667725, 0.41204834)
+size = Vector3(8.354173, 2.0667725, 1.5645447)
 
 [node name="ShipSpawnPlatform2" type="CSGBox3D" parent="Spwanplatform" unique_id=557178547]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.237677, 2.1788917, 4.9767303)
@@ -84,16 +108,19 @@ size = Vector3(0.33387852, 2.0184326, 24.958359)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.565985, 1.0773993, -0.0039590597)
 use_collision = true
 size = Vector3(2.5405273, 1.9343109, 3.8857422)
+material = SubResource("StandardMaterial3D_swebp")
 
 [node name="CSGBox3D7" type="CSGBox3D" parent="Spwanplatform/Stair" unique_id=2081374468]
 transform = Transform3D(1, 0, 0, 0, 0.9591413, 0.2829274, 0, -0.2829274, 0.9591413, 1.8471129, 0.3262934, -4.3520603)
 use_collision = true
 size = Vector3(1.9782715, 1.9343109, 5.5983887)
+material = SubResource("StandardMaterial3D_bwti8")
 
 [node name="CSGBox3D6" type="CSGBox3D" parent="Spwanplatform/Stair" unique_id=1253783313]
 transform = Transform3D(0.96682787, 0.25542888, 0, -0.25542888, 0.96682787, 0, 0, 0, 1, -1.548937, 1.3149407, -0.004447341)
 use_collision = true
 size = Vector3(4.56192, 2.642211, 3.8847656)
+material = SubResource("StandardMaterial3D_5geal")
 
 [node name="Sky" type="WorldEnvironment" parent="." unique_id=514286980]
 environment = SubResource("Environment_ttb4t")
@@ -102,7 +129,6 @@ script = ExtResource("4_l3lx2")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Sky" unique_id=1344593580]
 transform = Transform3D(1, 0, 0, 0, 0.03278891, 0.9994623, 0, -0.9994623, 0.03278891, 0, 63.280003, 0)
-light_energy = 6.703
 
 [node name="Testshop" type="Node3D" parent="." unique_id=1463175402]
 

@@ -4,10 +4,17 @@ extends WorldEnvironment
 
 var daylength: float = 30 
 
-var day_sky_color = Color("#a1d1ff", 0.5)      
-var day_horizon_color = Color("#e8ff96", 0.5)  
-var night_sky_color = Color("#08000f", 0.5)    
-var night_horizon_color = Color("#13001a", 0.5)
+var day_sky_color = Color("#4a8cff", 1)      
+var day_horizon_color = Color("#22437a", 1)  
+var night_sky_color = Color("#08000f", 1)    
+var night_horizon_color = Color("#13001a", 1)
+var noise: FastNoiseLite = FastNoiseLite.new()
+
+func _ready():
+	noise.noise_type = FastNoiseLite.TYPE_PERLIN
+	noise.seed = randi()
+	noise.frequency = 0.1
+	star_map()
 
 func _process(delta: float) -> void:
 	Globals.timeofday = fmod(Globals.timeofday + delta / daylength, 1)
@@ -32,3 +39,6 @@ func _process(delta: float) -> void:
 	else:
 		sun.light_energy = 0.0
 		sun.visible = false
+
+func star_map():
+	pass

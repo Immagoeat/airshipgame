@@ -15,7 +15,9 @@ albedo_texture = ExtResource("2_ngraj")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iq88t"]
 albedo_texture = ExtResource("2_ngraj")
 metallic = 1.0
+metallic_specular = 1.0
 metallic_texture = ExtResource("2_ngraj")
+roughness = 0.27
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmjsp"]
 albedo_texture = ExtResource("2_ngraj")
@@ -239,10 +241,6 @@ transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=1380726699]
 transform = Transform3D(-0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, 0.49999997, -0.49999997, 0.82585996, 0.4436091, -0.2909283)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1490376055]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.455217, 4.5151114)
-light_energy = 6.625
 
 [connection signal="body_entered" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_exited"]
