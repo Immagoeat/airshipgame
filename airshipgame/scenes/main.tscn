@@ -13,12 +13,12 @@ bounce = 0.1
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_o5qli"]
 
-[sub_resource type="Sky" id="Sky_0wfyh"]
+[sub_resource type="Sky" id="Sky_sugp2"]
 sky_material = SubResource("PhysicalSkyMaterial_o5qli")
 
 [sub_resource type="Environment" id="Environment_o5qli"]
 background_mode = 2
-sky = SubResource("Sky_0wfyh")
+sky = SubResource("Sky_sugp2")
 ssr_enabled = true
 fog_enabled = true
 fog_density = 0.0409

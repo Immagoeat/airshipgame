@@ -3,25 +3,35 @@
 [ext_resource type="PackedScene" uid="uid://8wj7mobdfg1n" path="res://scenes/player.tscn" id="1_2rrnh"]
 [ext_resource type="PackedScene" uid="uid://3bp76eanott8" path="res://models/airship.tscn" id="2_k5gqu"]
 [ext_resource type="Script" uid="uid://gp342a7xwuue" path="res://scripts/filmgrain.gd" id="3_k5gqu"]
+[ext_resource type="Shader" uid="uid://c80lsj0vtu5ct" path="res://scenes/sky.gdshader" id="3_oirpk"]
 [ext_resource type="Script" uid="uid://dqlepa1qk10hf" path="res://scripts/daycycle.gd" id="4_l3lx2"]
 [ext_resource type="Script" uid="uid://l2rokk1pd0yn" path="res://scripts/isinshoparea.gd" id="5_ttb4t"]
 
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_l3lx2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bv7f"]
+shader = ExtResource("3_oirpk")
+shader_parameter/day_sky = Color(0, 0, 0, 1)
+shader_parameter/day_horizon = Color(0, 0, 0, 1)
+shader_parameter/night_sky = Color(0, 0, 0, 1)
+shader_parameter/night_horizon = Color(0, 0, 0, 1)
+shader_parameter/sun_direction = Vector3(0, 0, 0)
+shader_parameter/saturation_amount = 1.0
+shader_parameter/horizon_offset = -0.3
 
 [sub_resource type="Sky" id="Sky_0wfyh"]
-sky_material = SubResource("PhysicalSkyMaterial_l3lx2")
+sky_material = SubResource("ShaderMaterial_0bv7f")
+process_mode = 3
 
 [sub_resource type="Environment" id="Environment_ttb4t"]
 background_mode = 2
 sky = SubResource("Sky_0wfyh")
 ssr_enabled = true
+ssr_max_steps = 48
 fog_enabled = true
 fog_density = 0.0409
 fog_sky_affect = 0.196
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.1325
-volumetric_fog_anisotropy = 0.01
-volumetric_fog_sky_affect = 0.299
+volumetric_fog_sky_affect = 0.0
 
 [sub_resource type="CompositorEffect" id="CompositorEffect_0wfyh"]
 resource_local_to_scene = false
