@@ -2,12 +2,36 @@
 
 [ext_resource type="Script" uid="uid://cxhthdawokihk" path="res://scripts/wheel.gd" id="1_20gbn"]
 [ext_resource type="Script" uid="uid://3cdlww6ri1jb" path="res://scripts/airship.gd" id="1_at44t"]
+[ext_resource type="Texture2D" uid="uid://dol0ilel4l7xc" path="res://textures/metal.png" id="2_ngraj"]
+[ext_resource type="Texture2D" uid="uid://ctjyyppxbqh8r" path="res://textures/wood.jpg" id="3_4y8k2"]
 [ext_resource type="Script" uid="uid://cqo30eomvsf5o" path="res://scripts/fly_range.gd" id="3_vrpcb"]
 [ext_resource type="Script" uid="uid://bfrexajj1slom" path="res://scripts/isairshiptouchingground.gd" id="4_8lp1e"]
 [ext_resource type="Script" uid="uid://di2bmv61o5vb0" path="res://scripts/engine.gd" id="4_kso20"]
 [ext_resource type="Script" uid="uid://lmkpdmt5fumd" path="res://scripts/lights.gd" id="6_w82rg"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k0odf"]
+albedo_texture = ExtResource("2_ngraj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iq88t"]
+albedo_texture = ExtResource("2_ngraj")
+metallic = 1.0
+metallic_texture = ExtResource("2_ngraj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vmjsp"]
+albedo_texture = ExtResource("2_ngraj")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dhxje"]
+albedo_texture = ExtResource("2_ngraj")
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7s3uy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qyj7w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_urtx8"]
+albedo_texture = ExtResource("3_4y8k2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_chgop"]
+albedo_texture = ExtResource("3_4y8k2")
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_7s3uy"]
 
@@ -30,6 +54,7 @@ script = ExtResource("1_at44t")
 
 [node name="back left support" type="CSGBox3D" parent="Supports" unique_id=480218370]
 transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, -1.1300255, 0.4831617, -0.18396497)
+material_override = SubResource("StandardMaterial3D_k0odf")
 use_collision = true
 size = Vector3(0.060058594, 1, 1)
 
@@ -37,16 +62,19 @@ size = Vector3(0.060058594, 1, 1)
 transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, -1.13, 0.483, 0.184)
 use_collision = true
 size = Vector3(0.060058594, 1, 1)
+material = SubResource("StandardMaterial3D_iq88t")
 
 [node name="front left support" type="CSGBox3D" parent="Supports" unique_id=962212818]
 transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, 0.8810966, 0.4831617, -0.4845655)
 use_collision = true
 size = Vector3(0.060058594, 1, 1)
+material = SubResource("StandardMaterial3D_vmjsp")
 
 [node name="front right support" type="CSGBox3D" parent="Supports" unique_id=1500433308]
 transform = Transform3D(0.20278102, 0, 0, 0, 1, 0, 0, 0, 0.017825007, 0.8808538, 0.483, 0.48)
 use_collision = true
 size = Vector3(0.060058594, 1, 1)
+material = SubResource("StandardMaterial3D_dhxje")
 
 [node name="Balloon" type="Node3D" parent="." unique_id=489070748]
 
@@ -61,6 +89,7 @@ mesh = SubResource("CapsuleMesh_7s3uy")
 transform = Transform3D(-2.4041263e-08, 0.55, 0, -0.55, -2.4041263e-08, 0, 0, 0, 0.6303668, -0.6782368, 1.2645699, 0)
 sides = 64
 ring_sides = 64
+material = SubResource("StandardMaterial3D_qyj7w")
 
 [node name="ring2" type="CSGTorus3D" parent="Balloon/Balloon rings" unique_id=1852373948]
 transform = Transform3D(-2.4041263e-08, 0.55, 0, -0.55, -2.4041263e-08, 0, 0, 0, 0.6303668, 0, 1.265, 0)
@@ -76,8 +105,10 @@ ring_sides = 64
 
 [node name="floor" type="CSGBox3D" parent="Floor" unique_id=2041811170]
 transform = Transform3D(1, 0, 0, 0, 0.04205066, 0, 0, 0, 1, -0.12246704, 0, 0)
+material_override = SubResource("StandardMaterial3D_urtx8")
 use_collision = true
 size = Vector3(2.0342407, 1, 1)
+material = SubResource("StandardMaterial3D_chgop")
 
 [node name="Control room" type="Node3D" parent="." unique_id=851916454]
 
@@ -208,6 +239,10 @@ transform = Transform3D(0.7071068, -0.5, 0.5, 0, 0.7071068, 0.70710677, -0.70710
 
 [node name="SpotLight3D2" type="SpotLight3D" parent="Lights" unique_id=1380726699]
 transform = Transform3D(-0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, 0.49999997, -0.49999997, 0.82585996, 0.4436091, -0.2909283)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1490376055]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.455217, 4.5151114)
+light_energy = 6.625
 
 [connection signal="body_entered" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Engine/Area3D" to="Engine" method="_on_area_3d_body_exited"]
