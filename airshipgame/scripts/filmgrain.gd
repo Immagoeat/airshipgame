@@ -10,6 +10,7 @@ var shader: RID
 var pipeline: RID
 var shader_compiled := false
 
+# CLEAN GLSL SHADER SOURCE (No GDScript mixed in here)
 const GLSL_SOURCE = "#version 450
 layout(local_size_x = 8, local_size_y = 8, local_size_z = 1) in;
 
@@ -90,12 +91,21 @@ func _render_callback(p_effect_callback_type: int, p_render_data: RenderData) ->
 	var x_groups = (size.x - 1) / 8 + 1
 	var y_groups = (size.y - 1) / 8 + 1
 
+	# --- FIXED TOGGLE LOGIC LIVES HERE ---
+	var final_amount = grain_amount
+
+	# Check the toggle if the game is running (prevents crashing in the editor)
+	if not Engine.is_editor_hint():
+		if Globals.film_grain_toggle == false:
+			final_amount = 0.0 # Force amount to 0, stopping the grain completely
+
 	var push_constant := PackedFloat32Array([
-		grain_amount,
+		final_amount, # Uses our dynamically adjusted amount
 		grain_size,
 		Time.get_ticks_msec() / 1000.0,
 		0.0
 	])
+	# --------------------------------------
 
 	for view in range(render_scene_buffers.get_view_count()):
 		var color_image = render_scene_buffers.get_color_layer(view)

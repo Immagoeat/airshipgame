@@ -3,20 +3,34 @@
 [ext_resource type="Script" uid="uid://c5pbew4ljchw4" path="res://scripts/pausemenu.gd" id="1_3otxd"]
 
 [node name="Control" type="Control" unique_id=1324027916]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = 362.0
+offset_right = 384.0
+offset_bottom = 362.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3otxd")
 
 [node name="Button" type="Button" parent="." unique_id=219053451]
 layout_mode = 0
-offset_left = 473.0
-offset_top = 255.0
-offset_right = 727.0
-offset_bottom = 352.0
+offset_left = 455.0
+offset_top = 100.0
+offset_right = 709.0
+offset_bottom = 197.0
 text = "Quit"
 
+[node name="CheckButton" type="CheckButton" parent="." unique_id=414864773]
+layout_mode = 0
+offset_left = 477.0
+offset_top = 214.0
+offset_right = 696.0
+offset_bottom = 245.0
+text = "film grain------------------"
+
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

@@ -8,11 +8,14 @@ const RUN_SPEED = 7.5
 var mousemode: bool = true
 var esc_cooldown: bool = false
 var is_locked: bool = false
+var paused: bool = false
 
 var current_vehicle = null
 
 @onready var camera: Camera3D = $Camera3D
 @onready var anim: AnimationPlayer = $bob
+@export var pause_menu_scene: PackedScene = preload("res://scenes/pausemenu.tscn")
+var pause_menu_instance: Node = null
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -23,12 +26,28 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		camera.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
-
+		
+		
 	if event.is_action_pressed("esc"):
-		if mousemode:
+		if not Globals.paused:
+			# OPEN MENU
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			mousemode = false
-			get_tree().change_scene_to_file("res://scenes/pausemenu.tscn")
+			Globals.paused = true
+			
+			pause_menu_instance = pause_menu_scene.instantiate()
+			# Add it to the root viewport so it displays on top of everything
+			get_tree().root.add_child(pause_menu_instance) 
+		else:
+			# CLOSE MENU
+			_resume_game()
+
+func _resume_game() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	Globals.paused = false
+	
+	if pause_menu_instance:
+		pause_menu_instance.queue_free()
+		pause_menu_instance = null
 
 func _physics_process(delta: float) -> void:
 	
