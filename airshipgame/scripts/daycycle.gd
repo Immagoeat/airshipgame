@@ -11,6 +11,7 @@ var night_horizon_color = Color("#13001a", 1)
 var noise: FastNoiseLite = FastNoiseLite.new()
 
 func _ready():
+	$CanvasLayer/ColorRect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	noise.noise_type = FastNoiseLite.TYPE_PERLIN
 	noise.seed = randi()
 	noise.frequency = 0.1

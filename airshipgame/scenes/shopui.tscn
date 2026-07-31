@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://bq4gd0sck1o5c"]
 
+[ext_resource type="Script" uid="uid://c3w8mmnnfvtnn" path="res://scenes/testbuy.gd" id="1_ux1rb"]
+[ext_resource type="Script" uid="uid://b6as3pj338rty" path="res://scenes/resume.gd" id="2_2qgf6"]
+
 [node name="Control" type="Control" unique_id=1986009529]
 layout_mode = 3
 anchors_preset = 15
@@ -7,3 +10,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="testbuy" type="Button" parent="." unique_id=1163155460]
+layout_mode = 0
+offset_left = 559.0
+offset_top = 128.0
+offset_right = 718.0
+offset_bottom = 206.0
+text = "Test buy"
+script = ExtResource("1_ux1rb")
+
+[node name="resume" type="Button" parent="." unique_id=1906727156]
+layout_mode = 0
+offset_left = 1085.0
+offset_top = 13.0
+offset_right = 1138.0
+offset_bottom = 62.0
+text = "X"
+script = ExtResource("2_2qgf6")
+
+[connection signal="pressed" from="testbuy" to="testbuy" method="_on_pressed"]
+[connection signal="pressed" from="resume" to="resume" method="_on_pressed"]

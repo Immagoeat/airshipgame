@@ -2,11 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://cvsnx6ojs8fdf" path="res://textures/concrete.jpg" id="1_0bv7f"]
 [ext_resource type="PackedScene" uid="uid://8wj7mobdfg1n" path="res://scenes/player.tscn" id="1_2rrnh"]
+[ext_resource type="Script" uid="uid://bh8mkg8q5o01t" path="res://scenes/mainworld.gd" id="1_uj7lx"]
 [ext_resource type="PackedScene" uid="uid://3bp76eanott8" path="res://models/airship.tscn" id="2_k5gqu"]
-[ext_resource type="Script" uid="uid://gp342a7xwuue" path="res://scripts/filmgrain.gd" id="3_k5gqu"]
-[ext_resource type="Shader" uid="uid://c80lsj0vtu5ct" path="res://shaders/sky.gdshader" id="3_oirpk"]
 [ext_resource type="Script" uid="uid://dqlepa1qk10hf" path="res://scripts/daycycle.gd" id="4_l3lx2"]
 [ext_resource type="Script" uid="uid://l2rokk1pd0yn" path="res://scripts/isinshoparea.gd" id="5_ttb4t"]
+[ext_resource type="Shader" uid="uid://bisp3ipbuk875" path="res://scenes/filmgraineffect.gdshader" id="6_0bv7f"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uj7lx"]
 albedo_texture = ExtResource("1_0bv7f")
@@ -20,8 +20,48 @@ albedo_texture = ExtResource("1_0bv7f")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5geal"]
 albedo_texture = ExtResource("1_0bv7f")
 
+[sub_resource type="Shader" id="Shader_oirpk"]
+code = "shader_type sky;
+
+uniform vec4 day_sky : source_color;
+uniform vec4 day_horizon : source_color;
+uniform vec4 night_sky : source_color;
+uniform vec4 night_horizon : source_color;
+
+uniform vec3 sun_direction;
+uniform float saturation_amount : hint_range(0.0, 1.0) = 0.4;
+
+// Adjust this to move the horizon line up or down
+// Negative values push it LOWER, positive values pull it HIGHER
+uniform float horizon_offset : hint_range(-2.0, 2.0) = -0.3;
+
+uniform float star_density : hint_range(0.0, 1.0) = 0.4;
+uniform float star_threshold : hint_range(0.8, 1.0) = 0.96;
+
+void sky() {
+    // 1. Calculate view height with the new horizon offset bias
+    // We use a high multiplier (e.g., 4.0) to keep the horizon transition sharp
+    float view_height = clamp((EYEDIR.y - horizon_offset) * 4.0, 0.0, 1.0);
+    
+    // 2. Determine day/night mix factor based on the sun's vector height
+    float day_factor = clamp((sun_direction.y + 0.2) * 2.0, 0.0, 1.0);
+    
+    // 3. Blend the day and night colors together
+    vec4 current_sky = mix(night_sky, day_sky, day_factor);
+    vec4 current_horizon = mix(night_horizon, day_horizon, day_factor);
+    vec4 final_color = mix(current_horizon, current_sky, view_height);
+    
+    // 4. Desaturation Step
+    float luma = dot(final_color.rgb, vec3(0.2126, 0.7152, 0.0722));
+    vec3 desaturated_rgb = mix(vec3(luma), final_color.rgb, saturation_amount);
+    
+    COLOR = desaturated_rgb;
+    ALPHA = final_color.a;
+}
+"
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0bv7f"]
-shader = ExtResource("3_oirpk")
+shader = SubResource("Shader_oirpk")
 shader_parameter/day_sky = Color(0, 0, 0, 1)
 shader_parameter/day_horizon = Color(0, 0, 0, 1)
 shader_parameter/night_sky = Color(0, 0, 0, 1)
@@ -47,19 +87,10 @@ volumetric_fog_enabled = true
 volumetric_fog_density = 0.1325
 volumetric_fog_sky_affect = 0.0
 
-[sub_resource type="CompositorEffect" id="CompositorEffect_0wfyh"]
-resource_local_to_scene = false
-resource_name = ""
-enabled = true
-effect_callback_type = 4
-needs_motion_vectors = false
-needs_normal_roughness = false
-script = ExtResource("3_k5gqu")
-grain_amount = 0.08
-grain_size = 1.0
-
-[sub_resource type="Compositor" id="Compositor_oirpk"]
-compositor_effects = Array[CompositorEffect]([SubResource("CompositorEffect_0wfyh")])
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uj7lx"]
+shader = ExtResource("6_0bv7f")
+shader_parameter/grain_amount = 0.0710000033725
+shader_parameter/grain_size = 2.40400011093012
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oirpk"]
 albedo_color = Color(0, 0, 1, 1)
@@ -67,6 +98,7 @@ albedo_color = Color(0, 0, 1, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_0bv7f"]
 
 [node name="Node3D" type="Node3D" unique_id=720770316]
+script = ExtResource("1_uj7lx")
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1547344657]
 transform = Transform3D(6.1959524, 0, 0, 0, 1, 0, 0, 0, 1, 4.595155, 0, -4.8757324)
@@ -122,13 +154,21 @@ use_collision = true
 size = Vector3(4.56192, 2.642211, 3.8847656)
 material = SubResource("StandardMaterial3D_5geal")
 
-[node name="Sky" type="WorldEnvironment" parent="." unique_id=514286980]
+[node name="FilmGrain" type="WorldEnvironment" parent="." unique_id=514286980]
 environment = SubResource("Environment_ttb4t")
-compositor = SubResource("Compositor_oirpk")
 script = ExtResource("4_l3lx2")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Sky" unique_id=1344593580]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="FilmGrain" unique_id=1344593580]
 transform = Transform3D(1, 0, 0, 0, 0.03278891, 0.9994623, 0, -0.9994623, 0.03278891, 0, 63.280003, 0)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="FilmGrain" unique_id=1776507094]
+
+[node name="ColorRect" type="ColorRect" parent="FilmGrain/CanvasLayer" unique_id=18541619]
+material = SubResource("ShaderMaterial_uj7lx")
+offset_left = -13.0
+offset_top = -7.0
+offset_right = 4306.0
+offset_bottom = 2525.0
 
 [node name="Testshop" type="Node3D" parent="." unique_id=1463175402]
 
