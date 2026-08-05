@@ -8,10 +8,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 384.0
-offset_top = 362.0
-offset_right = 384.0
-offset_bottom = 362.0
+offset_left = 12.0
+offset_top = 1.0
+offset_right = 12.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_3otxd")
@@ -31,7 +31,7 @@ offset_top = 214.0
 offset_right = 696.0
 offset_bottom = 245.0
 button_pressed = true
-text = "film grain------------------"
+text = "Film grain"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
 [connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

@@ -6,7 +6,7 @@ uniform vec4 night_sky : source_color;
 uniform vec4 night_horizon : source_color;
 
 uniform vec3 sun_direction;
-uniform float saturation_amount : hint_range(0.0, 1.0) = 0.4;
+uniform float saturation_amount : hint_range(0.0, 1.0) = 0.2;
 
 // Adjust this to move the horizon line up or down
 // Negative values push it LOWER, positive values pull it HIGHER

@@ -83,6 +83,7 @@ background_mode = 2
 sky = SubResource("Sky_0wfyh")
 ssr_enabled = true
 ssr_max_steps = 48
+fog_enabled = true
 fog_density = 0.0409
 fog_sky_affect = 0.196
 volumetric_fog_enabled = true
@@ -109,7 +110,7 @@ size = Vector3(5.4832764, 1, 44.751465)
 material = SubResource("StandardMaterial3D_uj7lx")
 
 [node name="Player" parent="." unique_id=2088449081 instance=ExtResource("1_2rrnh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4360504, 2.4269521, -0.06038916)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4360504, 1.421159, -0.06038916)
 
 [node name="Airship" parent="." unique_id=688934559 instance=ExtResource("2_k5gqu")]
 transform = Transform3D(-3.496911e-07, 0, -8, 0, 8, 0, 8, 0, -3.496911e-07, -7.894084, 2.9122276, 3.2786036)
