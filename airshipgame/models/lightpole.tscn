@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://2dmvwkw23phv"]
+
+[ext_resource type="Script" uid="uid://c4fvfcgab4u1a" path="res://models/lightpole.gd" id="1_ogtyp"]
+
+[node name="Lightpole" type="Node3D" unique_id=553533461]
+script = ExtResource("1_ogtyp")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1674764436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44950923, 2.2355347, -0.28643855)
+use_collision = true
+size = Vector3(0.10058594, 0.06311035, 0.16430664)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="." unique_id=1303372515]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.44970703, 0.8835449, -0.43432617)
+use_collision = true
+size = Vector3(0.10058594, 2.7670898, 0.13134766)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=1972183469]
+transform = Transform3D(1, 0, 0, 0, 1.1924881e-08, 1, 0, -1, 1.1924881e-08, -0.45019066, 2.195737, -0.24013984)
+spot_range = 25.0
+spot_angle = 62.15
